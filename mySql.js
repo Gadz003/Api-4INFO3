@@ -46,8 +46,17 @@ const deleteUsuario = async (id) => {
     return `Usuario de id ${id} deletado do Sql!`;
 }
 
+const updateUsuario = async (id, nome, email) => {
+    const con = await conexao();
+    await con.query('UPDATE usuarios SET nome = ?, email = ? WHERE id_usuarios = ?;', [nome, email, id]);
+    con.close();
+    return `Usuario de id ${id} atualizado para ${nome}!`;
+}
 
+
+    
 
 console.log(await getUsuario(2));
 console.log(await createUsuario('João', 'joao@example.com'));
 console.log(await deleteUsuario(2));
+console.log(await updateUsuario(1, 'Maria', 'maria@example.com'));
