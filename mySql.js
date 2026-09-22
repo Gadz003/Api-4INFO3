@@ -39,7 +39,15 @@ const createUsuario = async (nome, email) => {
 
 };
 
+const deleteUsuario = async (id) => {
+    const con = await conexao();
+    await con.query('DELETE FROM usuarios WHERE id_usuarios = ?;', [id]);
+    con.close();
+    return `Usuario de id ${id} deletado do Sql!`;
+}
+
 
 
 console.log(await getUsuario(2));
 console.log(await createUsuario('João', 'joao@example.com'));
+console.log(await deleteUsuario(2));
